@@ -14,7 +14,7 @@ The project has been updated for Laravel 6. Just switch to the 'Laravel-6.1' bra
 
 ## Installation
 
-- Clone the repository -> git clone git@github.com:alekslauda/transactions.git
+- Clone the repository -> `git clone git@github.com:alekslauda/transactions.git`
 - Installer back dependencies with `composer install`
 - Install front dependencies with `npm install`
 - Copy file `.env.example` in `.env` and add following informations (command: `cp .env.example .env`):
