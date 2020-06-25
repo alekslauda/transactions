@@ -18,6 +18,10 @@ class Transactions extends Model
         'c' => 'Complete',
     ];
 
+    protected $casts = [
+        'amount' => 'string',
+    ];
+
     protected $guarded = [];
 
     protected $appends = ['status_type'];
@@ -52,7 +56,7 @@ class Transactions extends Model
         $statusType = array_search($status, self::STATUSES);
 
         if ($statusType === false) {
-            throw new \Exception("Invalid status type: {$statusType}. Valid statuses: ". implode(',', self::STATUSES) ." ");
+            throw new \Exception("Invalid status type: {$status}. Valid statuses: ". implode(',', self::STATUSES) ." ");
         }
 
         return $statusType;

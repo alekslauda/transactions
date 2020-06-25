@@ -7,7 +7,7 @@
         </div>
 
         <div class="card-body">
-            <form @submit.prevent="transfer" method="post" action="" class="transfer-form-container">
+            <form @submit.prevent="transfer" method="post" action="" autocomplete="off" class="transfer-form-container">
 
                 <p v-if="has_error" class="alert alert-danger">Invalid transfer. Please make sure you've entered the information needed for a transfer.</p>
 
@@ -190,7 +190,7 @@
                         method: 'POST',
                         data: this.transferData,
                     }).then((res) => {
-                        this.$emit('transferMaded', res.data);
+                        this.$emit('transferMaded', res.data.data);
                         this.loading = false;
                         this.$loading(this.loading)
                         this.resetTransferData();

@@ -14,7 +14,7 @@
             <div class="card-body" v-if="transactions.length">
                 <div class="form-group filters-container">
                     <div class="search-input col-md-5">
-                        <input type="text" id="search" required="required" placeholder="Search by typing..." @input="search($event)" /><i class="bar"></i>
+                        <input type="text" id="search" required="required" placeholder="Search by typing..." autocomplete="off" @input="search($event)" /><i class="bar"></i>
                     </div>
                     <div class="sort">
                         <span style="color: black; margin:8px 10px 0px 0px">Sort By</span>
@@ -113,7 +113,9 @@
             },
 
             handleTransfer($event) {
-                this.getTransactions();
+                this.transactions = [...this.transactions];
+                this.transactions.push($event);
+                this.copyTransactions = this.transactions;
             },
 
             getClassBasedOnStatusType(statusType) {
@@ -138,18 +140,19 @@
                     this.sortBy(typeObj.type);
                 } else {
                     this.prevSortType = '';
-                    this.transactions = this.copyTransactions;
+                    this.transactions = [...this.copyTransactions];
                 }
             },
 
             search($event) {
 
                 let term = $event.target.value.toLowerCase();
+                this.noSearchResults = false;
 
                 if(!term) {
-                    this.transactions = this.copyTransactions;
+                    this.transactions = [...this.copyTransactions];
                 } else {
-                    let filteredTransactions = this.transactions.filter(t => {
+                    let filteredTransactions = [...this.transactions].filter(t => {
                         let paymentType = t.payment_type.toLowerCase();
                         let sender = t.sender.username.toLowerCase();
                         let receiver = t.receiver.username.toLowerCase();
@@ -162,7 +165,7 @@
 
                     if (filteredTransactions.length) {
                         this.noSearchResults = false;
-                        this.transactions = filteredTransactions;
+                        this.transactions = [...filteredTransactions];
                     } else {
                         this.noSearchResults = true;
                     }

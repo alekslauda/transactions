@@ -72,7 +72,7 @@ class TransactionsController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'data' => $transaction->toArray()
+            'data' => $transaction->load(['sender', 'receiver'])->toArray()
         ], 200);
     }
 
